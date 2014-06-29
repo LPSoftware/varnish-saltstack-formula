@@ -41,8 +41,10 @@ include:
     - managed
     - source:
       {% for grain in files_switch if salt['grains.get'](grain) is defined -%}
+      - salt://varnish/files/{{ salt['grains.get'](grain) }}/etc/varnish/{{ file }}
       - salt://varnish/files/{{ salt['grains.get'](grain) }}/etc/varnish/{{ file }}.jinja
       {% endfor -%}
+      - salt://varnish/files/default/etc/varnish/{{ file }}
       - salt://varnish/files/default/etc/varnish/{{ file }}.jinja
     - template: jinja
     - require:
