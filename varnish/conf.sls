@@ -39,6 +39,7 @@ include:
 /etc/varnish/{{ file }}:
   file:
     - managed
+    - makedirs: true
     - source:
       {% for grain in files_switch if salt['grains.get'](grain) is defined -%}
       - salt://varnish/files/{{ salt['grains.get'](grain) }}/etc/varnish/{{ file }}
